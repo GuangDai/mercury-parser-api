@@ -9,8 +9,6 @@ const cluster = require('cluster')
 const config = require('./config');
 const routes = require('./routes');
 
-const { Worker } = require("worker_threads");
-
 
 const app = express();
 
