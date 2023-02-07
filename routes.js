@@ -25,9 +25,6 @@ router.route('/parser').get(async (req, res) => {
             result = { error: true, messages: error.message };
         }
     }
-
-}}catch(e){console.log(e.message);}
-    return res.json(result);
 });
 
 module.exports = router;
