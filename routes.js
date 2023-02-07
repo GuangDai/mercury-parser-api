@@ -11,7 +11,7 @@ router.route('/parser').get(async (req, res) => {
     let result = { message: 'No URL was provided' };
     if (req.query.url) {
         try {
-            const contentType = req.query.contentType || 'markdown';
+            const contentType = req.query.contentType || 'html';
             let headers = new Object();
             if (typeof req.query.headers !== 'undefined') {
                 headers = JSON.parse(req.query.headers);
@@ -24,6 +24,8 @@ router.route('/parser').get(async (req, res) => {
             result = { error: true, messages: error.message };
         }
     }
+    return res.json(result);
+
 });
 
 module.exports = router;
