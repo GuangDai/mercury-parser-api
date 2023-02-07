@@ -25,7 +25,6 @@ router.route('/parser').get(async (req, res) => {
         }
     }
     return res.json(result);
-
 });
 
 module.exports = router;
