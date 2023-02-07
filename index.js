@@ -31,7 +31,9 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`)
     })
 } else {
-    app.listen(config.server.port,()=> {})
-    console.log(`Worker ${process.pid} started`)
+
+    app.listen(config.server.port, () => {
+        console.log(`🚀Mercury Parser API listens on port ${config.server.port}`);
+    });
 }
 module.exports = app;
