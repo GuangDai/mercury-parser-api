@@ -13,7 +13,7 @@ router.route('/parser').get(async (req, res) => {
     let result = { message: 'No URL was provided' };
     if (req.query.url) {
         if (req.query.url.match(/(\.)google/)){
-            const python = spawn('python', ['request_url.py'],req.query.url);
+            const python = spawn('python', ['request_url.py',req.query.url]);
              python.stdout.on('data', function (data) {
                 dataToSend = data.toString();
                 console.log(dataToSend);
