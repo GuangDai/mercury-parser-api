@@ -1,6 +1,7 @@
 const Router = require('express').Router;
 const router = new Router();
 const Mercury = require('@postlight/mercury-parser');
+import fetch from 'node-fetch';
 router.route('/').get((req, res) => {
     res.json({
         message: 'Welcome to ....mercury-parser-api API! Endpoint: /parser',
