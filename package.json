@@ -24,7 +24,8 @@
     "express": "4.18.2",
     "helmet": "6.0.1",
     "morgan": "1.10.0",
-    "node-fetch": "*"
+    "node-fetch": "*",
+    "follow-redirects": "*"
   },
   "devDependencies": {
     "eslint": "8.33.0",
