@@ -4,8 +4,8 @@ ARG NODE_ENV=production
 
 WORKDIR /app
 
-RUN apk --no-cache add python3 &&
-pip3 install requests
+RUN apk --no-cache add python3 \
+    && pip3 install requests
 
 COPY package*.json ./
 
