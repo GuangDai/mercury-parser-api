@@ -4,6 +4,8 @@ ARG NODE_ENV=production
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y python3 python3-distutils python3-pip python3-apt
+
 COPY package*.json ./
 
 RUN apk add --no-cache --virtual build-pack git \
