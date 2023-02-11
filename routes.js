@@ -10,7 +10,7 @@ router.route('/').get((req, res) => {
 router.route('/parser').get(async (req, res) => {
     let result = { message: 'No URL was provided' };
     if (req.query.url) {
-        if req.query.url.match(/(\.)google/){
+        if (req.query.url.match(/(\.)google/)){
             temp = fetch(req.query.url);
             req.query.url = temp.url;
         }
