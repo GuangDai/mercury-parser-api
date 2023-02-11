@@ -15,8 +15,10 @@ router.route('/parser').get(async (req, res) => {
         if (req.query.url.match(/(\.)google/)){
             const python = spawn('python3', ['request_url.py',req.query.url]);
              python.stdout.on('data', function (data) {
-                dataToSend = data.toString();
+                var dataToSend = data.toString();
                 console.log(dataToSend);
+                req.query.url = dataToSend;
+
              });
              python.stderr.on('data',data=>{console.error(`stderr:${data}`);});
              await python.on('close', (code) => {
