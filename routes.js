@@ -1,10 +1,7 @@
 const Router = require('express').Router;
 const router = new Router();
 const Mercury = require('@postlight/mercury-parser');
-const fetch = (...args) =>
-  import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const url = require('url');
-const { http, https } = require('follow-redirects');
+const {spawn} = require('child_porcess');
 
 router.route('/').get((req, res) => {
     res.json({
@@ -16,11 +13,14 @@ router.route('/parser').get(async (req, res) => {
     let result = { message: 'No URL was provided' };
     if (req.query.url) {
         if (req.query.url.match(/(\.)google/)){
-            options = url.parse('http://bit.ly/900913');
-            options.maxRedirects = 10;
-            temp = https.request(options);
-            print(temp);
-            req.query.url = temp.responseUrl;
+            const python = spawn('python', ['request_url.py'],req.query.url);
+             python.stdout.on('data', function (data) {
+                dataToSend = data.toString();
+                console.log(dataToSend);
+             });
+             python.on('close', (code) => {
+                req.query.url = dataToSend;
+             });         
         }
         try {
             const contentType = req.query.contentType || 'html';
