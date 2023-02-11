@@ -18,23 +18,41 @@ router.route('/parser').get(async (req, res) => {
                 dataToSend = data.toString();
                 console.log(dataToSend);
              });
-             python.on('close', (code) => {
+             python.stderr.on('data',data=>{console.error(`stderr:${data}`);});
+             await python.on('close', (code) => {
                 req.query.url = dataToSend;
-             });         
-        }
-        try {
-            const contentType = req.query.contentType || 'html';
-            let headers = new Object();
-            if (typeof req.query.headers !== 'undefined') {
-                headers = JSON.parse(req.query.headers);
+             });
+             try {
+                const contentType = req.query.contentType || 'html';
+                let headers = new Object();
+                if (typeof req.query.headers !== 'undefined') {
+                    headers = JSON.parse(req.query.headers);
+                }
+                result = await Mercury.parse(dataToSend, {
+                    contentType,
+                    headers,
+                });
+            } catch (error) {
+                result = { error: true, messages: error.message };
             }
-            result = await Mercury.parse(req.query.url, {
-                contentType,
-                headers,
-            });
-        } catch (error) {
-            result = { error: true, messages: error.message };
         }
+        else{
+            try {
+                const contentType = req.query.contentType || 'html';
+                let headers = new Object();
+                if (typeof req.query.headers !== 'undefined') {
+                    headers = JSON.parse(req.query.headers);
+                }
+                result = await Mercury.parse(req.query.url, {
+                    contentType,
+                    headers,
+                });
+            } catch (error) {
+                result = { error: true, messages: error.message };
+        }
+        
+        }
+
     }
     return res.json(result);
 });
