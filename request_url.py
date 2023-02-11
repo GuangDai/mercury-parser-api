@@ -1,11 +1,11 @@
 import requests
 import sys
 import time
-url = sys[1]
+url = sys.argv[1]
 times = 10
 while times > 0:
   try:
-    temp = requests.get(sys[1])
+    temp = requests.get(url)
     break
   except:
     times -= 10
