@@ -22,7 +22,7 @@ router.route('/parser').get(async (req, res) => {
              });
              python.stderr.on('data',data=>{console.error(`stderr:${data}`);});
              await python.on('close', (code) => {
-                req.query.url = dataToSend;
+                 console.log("Done");
              });
              try {
                 const contentType = req.query.contentType || 'html';
