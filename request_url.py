@@ -9,6 +9,6 @@ while times > 0:
     break
   except:
     times -= 10
-    time.sleep(10-times)
+    time.sleep((10-times)/10)
 print(temp.url)
 sys.stdout.flush()
