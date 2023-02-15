@@ -5,17 +5,17 @@ const {spawn} = require('child_process');
 
 function request_url (url){
     let dataToSend;
-    console.log(url);
+//     console.log(url);
     let p = new Promise(function (resolve){
         const python = spawn('python3', ['request_url.py',url]);
         python.stdout.on('data', function (data) {
             dataToSend = data.toString();
             resolve(dataToSend)
-            console.log(dataToSend);
+//             console.log(dataToSend);
         });
         python.stderr.on('data',data=>{console.error(`stderr:${data}`);});
         python.on('close', (code) => {
-            console.log("Done");
+//             console.log("Done");
         });
     })
 
